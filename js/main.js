@@ -1,8 +1,8 @@
 let searchContainer = document.getElementById("searchContainer");
 let interior = document.getElementById('meals')
-$(document).ready(function () {
+$(document).ready(function load() {
     // loading screen
-    $('#loading').fadeOut(500)
+    $('#loading').fadeOut(500 )
     $('body').css('overflow-y', 'auto')
 })
 //--------------------------------------------------------------------
@@ -102,7 +102,6 @@ async function searchName(meal) {
 }
 //first letter
 async function searchLetter(firstLetter) {
-    $('#loading').fadeIn(500);
     closeNav()
     $(interior).html("");
     firstLetter == "" ? firstLetter = "a" : ""
@@ -115,20 +114,18 @@ async function searchLetter(firstLetter) {
     else {
         displayMeals([])
     }
-    $('#loading').fadeOut(500);
 }
 //--------------------------------------------------------------------
 //Meal Details
 
 async function mealDetails(mealID) {
     $(interior).html("");
-    $('#loading').fadeIn(500);
+    $('#loading').fadeIn(200);
     let final = await fetch(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${mealID}`);
     final = await final.json();
     displayDetails(final.meals[0])
     // console.log(final.meals);
     $('#loading').fadeOut(500);
-
 }
 
 function displayDetails(meal) {
@@ -182,14 +179,15 @@ function displayDetails(meal) {
 
 //Categories
 $('#Categories').on("click", async function categories() {
-    $('#loading').fadeIn(500);
     closeNav()
     $(interior).html("");
+    $('#loading').fadeIn(200);
     $(searchContainer).html("");
     let final = await fetch(`https://www.themealdb.com/api/json/v1/1/categories.php`)
     final = await final.json()
-    displayCategories(final.categories)
+    displayCategories(final.categories.slice(0, 20))
     $('#loading').fadeOut(500);
+
 })
 
 function displayCategories(C) {
@@ -211,17 +209,21 @@ function displayCategories(C) {
 
 async function displayCategoryDetail(c) {
     $(interior).html("");
+    $('#loading').fadeIn(500);
+
     let final = await fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?c=${c}`)
     final = await final.json()
 
     displayMeals(final.meals)
+    $('#loading').fadeOut(500);
+
 }
 
 //--------------------------------------------------------------------
 
 //Area 
 $('#Area').on("click", async function Area() {
-    $('#loading').fadeIn(500);
+    $('#loading').fadeIn(200);
 
     closeNav()
     $(interior).html("");
@@ -248,7 +250,7 @@ function displayArea(A) {
     $(interior).html(Area);
 }
 async function areaDetails(area) {
-    $('#loading').fadeIn(500);
+    $('#loading').fadeIn(200);
 
     $(interior).html("");
     let final = await fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?a=${area}`)
@@ -295,7 +297,7 @@ async function ingredientsDetails(ingredients) {
     $(interior).html("");
     let final = await fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?i=${ingredients}`)
     final = await final.json()
-    displayMeals(final.meals.slice(0, 20))
+    displayMeals(final.meals)
     $('#loading').fadeOut(500);
 
 }
@@ -305,6 +307,8 @@ async function ingredientsDetails(ingredients) {
 // Contacts
 $('#Contact').on("click", function showContacts() {
     closeNav()
+    $('#loading').fadeIn(200);
+    $(searchContainer).html("");
     $(interior).html(
         `<div class="contact min-vh-100 d-flex justify-content-center align-items-center">
     <div class="container w-75 text-center">
@@ -375,52 +379,50 @@ $('#Contact').on("click", function showContacts() {
     document.getElementById("repasswordInput").addEventListener("focus", () => {
         repasswordInput = true
     })
+    $('#loading').fadeOut(500);
+
 })
+nameInput = false
+emailInput = false
+phoneInput = false
+ageInput = false
+passwordInput = false
+repasswordInput = false
 
 function inputsValid() {
     if (nameInput) {
         if (nameValid()) {
             document.getElementById("nameAlert").classList.replace("d-block", "d-none")
-
         } else {
             document.getElementById("nameAlert").classList.replace("d-none", "d-block")
-
         }
     }
     if (emailInput) {
-
         if (emailValid()) {
             document.getElementById("emailAlert").classList.replace("d-block", "d-none")
         } else {
             document.getElementById("emailAlert").classList.replace("d-none", "d-block")
-
         }
     }
-
     if (phoneInput) {
         if (phoneValid()) {
             document.getElementById("phoneAlert").classList.replace("d-block", "d-none")
         } else {
             document.getElementById("phoneAlert").classList.replace("d-none", "d-block")
-
         }
     }
-
     if (ageInput) {
         if (ageValid()) {
             document.getElementById("ageAlert").classList.replace("d-block", "d-none")
         } else {
             document.getElementById("ageAlert").classList.replace("d-none", "d-block")
-
         }
     }
-
     if (passwordInput) {
         if (passwordValid()) {
             document.getElementById("passwordAlert").classList.replace("d-block", "d-none")
         } else {
             document.getElementById("passwordAlert").classList.replace("d-none", "d-block")
-
         }
     }
     if (repasswordInput) {
@@ -428,15 +430,13 @@ function inputsValid() {
             document.getElementById("repasswordAlert").classList.replace("d-block", "d-none")
         } else {
             document.getElementById("repasswordAlert").classList.replace("d-none", "d-block")
-
         }
     }
-
-
+    
     if (nameValid() && emailValid() && phoneValid() && ageValid() && passwordValid() && repasswordValid()) {
         submitBtn.removeAttribute("disabled")
     } else {
-        submitBtn.setAttribute("disabled", true)
+        submitBtn.setAttribute("disabled")
     }
 }
 
