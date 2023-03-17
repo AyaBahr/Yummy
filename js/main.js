@@ -214,7 +214,7 @@ async function displayCategoryDetail(c) {
     let final = await fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?c=${c}`)
     final = await final.json()
 
-    displayMeals(final.meals.slice(0, 20))
+    displayMeals(final.meals)
 }
 
 //--------------------------------------------------------------------
@@ -253,7 +253,7 @@ async function areaDetails(area) {
     $(interior).html("");
     let final = await fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?a=${area}`)
     final = await final.json()
-    displayMeals(final.meals.slice(0, 20))
+    displayMeals(final.meals)
     $('#loading').fadeOut(500);
 
 }
