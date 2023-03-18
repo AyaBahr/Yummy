@@ -137,10 +137,10 @@ function displayDetails(meal) {
             ingredients += `<li class="alert alert-info m-2 p-1">${meal[`strMeasure${i}`]} ${meal[`strIngredient${i}`]}</li>`
         }
     }
-    let tags = meal.strTags?.split(",")
-    if (!tags) { 
-        tags = [] 
-    }
+    let tags = meal.strTags?.split(","):tags = [] 
+//     if (!tags) { 
+        
+//     }
 
     let tagsStr = ''
     for (let i = 0; i < tags.length; i++) {
