@@ -436,7 +436,7 @@ function inputsValid() {
     if (nameValid() && emailValid() && phoneValid() && ageValid() && passwordValid() && repasswordValid()) {
         submitBtn.removeAttribute("disabled")
     } else {
-        submitBtn.setAttribute("disabled")
+        submitBtn.setAttribute("disabled" , "")
     }
 }
 
