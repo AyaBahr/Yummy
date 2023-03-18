@@ -140,7 +140,7 @@ function displayDetails(meal) {
     let tags = meal.strTags
     if (!tags) { 
         tags = [] 
-    }else{tags.split(",")}
+    }else{meal.strTags.split(",")}
         
 
     let tagsStr = ''
