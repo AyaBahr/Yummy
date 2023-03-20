@@ -2,7 +2,7 @@ let searchContainer = document.getElementById("searchContainer");
 let interior = document.getElementById('meals')
 $(document).ready(function load() {
     // loading screen
-    $('#loading').fadeOut(500 )
+    $('#loading').fadeOut(500)
     $('body').css('overflow-y', 'auto')
 })
 //--------------------------------------------------------------------
@@ -47,7 +47,7 @@ function openNav() {
     }
 }
 closeNav()
-$('#open-close').click( ()=>{
+$('#open-close').click(() => {
     if ($('.sidenav ').css('left') == '0px') {
         closeNav()
     }
@@ -69,11 +69,11 @@ function displayMeals(m) {
                         </div>
                     </div>
                 </div>`
-            }
+    }
     $(interior).html(singleMeal);
 }
 //search
-$('#search').on("click", ()=>{
+$('#search').on("click", () => {
     closeNav()
     $(interior).html("");
     $(searchContainer).html(`
@@ -137,10 +137,11 @@ function displayDetails(meal) {
             ingredients += `<li class="alert alert-info m-2 p-1">${meal[`strMeasure${i}`]} ${meal[`strIngredient${i}`]}</li>`
         }
     }
-let tags = meal.strTags
-    if (tags != null ) {
-        tags.split(",")
-    } else { tags = [] }        
+    let tags = meal.strTags
+    console.log(tags);
+    if (tags != null) {
+        tags = meal.strTags.split(",")
+    } else { tags = [] }
 
     let tagsStr = ''
     for (let i = 0; i < tags.length; i++) {
@@ -432,11 +433,11 @@ function inputsValid() {
             document.getElementById("repasswordAlert").classList.replace("d-none", "d-block")
         }
     }
-    
+
     if (nameValid() && emailValid() && phoneValid() && ageValid() && passwordValid() && repasswordValid()) {
         submitBtn.removeAttribute("disabled")
     } else {
-        submitBtn.setAttribute("disabled" ,true)
+        submitBtn.setAttribute("disabled", true)
     }
 }
 
